@@ -13,13 +13,15 @@
 {##}
 </head>
 <body>
-{% if autosearch.count > 0 %}
-    {% for auto in autosearch %}
-        <li><a href = '/autosearch/get/{{ auto.id }}'</li>
-    {% endfor %}
-{% endif %}
-{% block content %}
 
-{% endblock %}
+
+<h3>Search</h3>
+{% csrf_token %}
+<input type="text" id="search" name="search"/>
+
+<ul id="search-results">
+
+</ul>
+
 </body>
 </html>

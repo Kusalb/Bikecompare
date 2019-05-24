@@ -1,16 +1,18 @@
 from django.core.serializers import json
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 
 # Create your views here.
 from django.http import HttpResponse
+from django.template.context_processors import csrf
 
 from compare.models import CompareBikeList
 
 
 def index(request):
-    compare = CompareBikeList.objects.all()
-    print(compare)
-    return render(request, 'compare/index.html', context={'compare': compare})
+    args = {}
+    args.update(csrf(request))
+    return render(request, 'compare/index.html', args)
+
 
 #
 # def search_titles(request):
@@ -24,9 +26,11 @@ def index(request):
 def search_titles(request):
     if request.method == 'POST':
         search_text = request.POST['search_text']
+        print(search_text)
     else:
         search_text = ''
     autosearch = CompareBikeList.objects.filter(bname__contains=search_text)
-    return render(request, 'compare/ajax_search.html', {'autosearch': autosearch})
+    print(autosearch)
+    return render_to_response('compare/ajax_search.html', {'autosearch': autosearch})
 
-    return None
+

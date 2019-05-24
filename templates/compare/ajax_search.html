@@ -1,4 +1,9 @@
-{% extends 'index.html' %}
+{% if autosearch.count > 0 %}
+    {% for a in autosearch %}
+        <li>{{ a.bname }}</li>
+    {% endfor %}
+{% else %}
+<li>None to show!</li>
+{% endif %}
 
-{% block content %}
-{% endblock %}
+

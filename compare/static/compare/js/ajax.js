@@ -2,18 +2,18 @@ $(function () {
     $('#search').keyup(function () {
         $.ajax({
             type: "POST",
-            url: "/articles/search/",
-            data:{
+            url: "/compare/search/",
+            data: {
                 'search_text': $('#search').val(),
                 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
             },
             sucess: searchSuccess,
-            dataType:'html'
+            dataType: 'html'
         });
     });
 });
 
-fuction searchSuccess(data, textStatus, jqXHR)
+function searchSuccess(data, textStatus, jqXHR)
 {
     $('#search-results').html(data)
 }
