@@ -4,16 +4,15 @@ $(function () {
             type: "POST",
             url: "/compare/search/",
             data: {
-                'search_text': $('#search').val(),
-                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                'search_text': $('#search').val()
             },
-            sucess: searchSuccess,
+            success: function searchSuccess(data, textStatus, jqXHR)
+            {
+                console.log("test");
+                $('#search-results').html(data)
+            },
             dataType: 'html'
         });
     });
 });
 
-function searchSuccess(data, textStatus, jqXHR)
-{
-    $('#search-results').html(data)
-}
